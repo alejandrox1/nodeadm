@@ -30,7 +30,7 @@ var nodeCmdReset = &cobra.Command{
 
 func kubeadmReset() {
 	log.Infof("[nodeadm:reset] Invoking kubeadm reset")
-	_ = exec.Command(filepath.Join(constants.BaseInstallDir, "kubeadm"), "reset", "--ignore-preflight-errors=all").Run()
+	_ = exec.Command(filepath.Join(constants.BaseInstallDir, "kubeadm"), "reset", "--ignore-preflight-errors=all", "--force").Run()
 }
 
 func cleanupKeepalived() {
