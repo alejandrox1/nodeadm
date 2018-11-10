@@ -34,3 +34,9 @@ func ValidateInit(config *apis.InitConfiguration) []error {
 	}
 	return errorList
 }
+
+// ValidateInit validates the configuration used by the join verb
+func ValidateJoin(config *apis.JoinConfiguration) []error {
+	var errorList []error
+	return errorList
+}
