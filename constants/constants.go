@@ -17,6 +17,7 @@ const (
 	SystemdDir                            = "/etc/systemd/system"
 	ConfigDir                             = "conf"
 	FlannelVersion                        = "v0.10.0"
+	FissionVersion                        = "0.12.0"
 	DefaultPodNetwork                     = "10.244.0.0/16"
 	DefaultDNSIP                          = "10.96.0.10"
 	DefaultServiceSubnet                  = "10.96.0.0/12"
@@ -52,6 +53,7 @@ const (
 
 var KubeDirName = filepath.Join("kubernetes", KubernetesVersion)
 var FlannelDirName = filepath.Join("flannel", FlannelVersion)
+var FissionDirName = filepath.Join("fission", FissionVersion)
 var CNIDirName = filepath.Join("cni", CNIVersion)
 var CniVersionInstallDir = filepath.Join(CNIBaseDir, CNIVersion)
 var ImagesCacheDir = filepath.Join(CacheDir, "images")
@@ -65,6 +67,8 @@ const (
 	FlannelManifestFilename             = "kube-flannel.yml"
 	AdminKubeconfigFile                 = "/etc/kubernetes/admin.conf"
 	KeepalivedConfigFilename            = "/etc/keepalived/keepalived.conf"
+	FissionManifestFilename             = "fission-all-0.12.0.yaml"
+	FissionCli                          = "fission-cli-linux"
 )
 
 var CNIPluginsFilename = fmt.Sprintf("cni-plugins-amd64-%s.tgz", CNIVersion)

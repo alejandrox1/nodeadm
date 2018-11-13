@@ -24,6 +24,7 @@ func InstallMasterComponents(config *apis.InitConfiguration) {
 	PopulateCache()
 	placeKubeComponents()
 	placeCNIPlugin()
+	placeFissionComponents()
 	if err := systemd.StopIfActive("kubelet.service"); err != nil {
 		log.Fatalf("Failed to install kubelet service: %v", err)
 	}
@@ -144,6 +145,11 @@ func placeKubeComponents() {
 	_, err = copyFile(filepath.Join(constants.CacheDir, constants.KubeDirName, "kubeadm"), filepath.Join(constants.BaseInstallDir, "kubeadm"))
 	checkError(err, "Unable to copy file")
 	_, err = copyFile(filepath.Join(constants.CacheDir, constants.KubeDirName, "kubelet"), filepath.Join(constants.BaseInstallDir, "kubelet"))
+	checkError(err, "Unable to copy file")
+}
+
+func placeFissionComponents() {
+	_, err := copyFile(filepath.Join(constants.CacheDir, constants.FissionDirName, constants.FissionCli), filepath.Join(constants.BaseInstallDir, "fission"))
 	checkError(err, "Unable to copy file")
 }
 

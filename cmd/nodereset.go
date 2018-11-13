@@ -71,6 +71,7 @@ func cleanupBinaries() {
 	os.RemoveAll(filepath.Join(constants.BaseInstallDir, "kubelet"))
 	os.RemoveAll(filepath.Join(constants.BaseInstallDir, "kubeadm"))
 	os.RemoveAll(filepath.Join(constants.BaseInstallDir, "kubectl"))
+	os.RemoveAll(filepath.Join(constants.BaseInstallDir, "fission"))
 
 	os.RemoveAll(constants.CNIBaseDir)
 }

@@ -67,6 +67,18 @@ var NodeArtifact = []Artifact{
 		Upstream: fmt.Sprintf("https://raw.githubusercontent.com/coreos/flannel/%s/Documentation/", constants.FlannelVersion),
 		Local:    filepath.Join(constants.CacheDir, constants.FlannelDirName),
 	},
+	{
+		Name:     constants.FissionManifestFilename,
+		Type:     "regular",
+		Upstream: fmt.Sprintf("https://github.com/fission/fission/releases/download/%s/", constants.FissionVersion),
+		Local:    filepath.Join(constants.CacheDir, constants.FissionDirName),
+	},
+	{
+		Name:     constants.FissionCli,
+		Type:     "executable",
+		Upstream: fmt.Sprintf("https://github.com/fission/fission/releases/download/%s/", constants.FissionVersion),
+		Local:    filepath.Join(constants.CacheDir, constants.FissionDirName),
+	},
 }
 
 func loadAvailableImages(cli *client.Client) {

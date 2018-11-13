@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -66,6 +67,9 @@ var nodeCmdInit = &cobra.Command{
 		}
 
 		networkInit(config)
+
+		// val, _ := cmd.Flags().GetBool("fission")
+		fissionInit()
 	},
 }
 
@@ -104,7 +108,24 @@ func kubeadmInit(config string) {
 	}
 }
 
+func fissionInit() {
+	file := filepath.Join(constants.CacheDir, constants.FissionDirName, constants.FissionManifestFilename)
+	fissionManifest, err := ioutil.ReadFile(file)
+	if err != nil {
+		log.Fatal("Failed to read fission manifest")
+	}
+	cmd := exec.Command(filepath.Join(constants.BaseInstallDir, "kubectl"), fmt.Sprintf("--kubeconfig=%s", constants.AdminKubeconfigFile), "apply", "-f", "-")
+	reader := bytes.NewReader(fissionManifest)
+	cmd.Stdin = reader
+	err = cmd.Run()
+	if err != nil {
+		log.Fatalf("failed to run %q: %s", strings.Join(cmd.Args, " "), err)
+	}
+
+}
+
 func init() {
 	rootCmd.AddCommand(nodeCmdInit)
 	nodeCmdInit.Flags().String("cfg", "", "Location of configuration file")
+	nodeCmdInit.Flags().Bool("fission", true, "Enable fission")
 }
